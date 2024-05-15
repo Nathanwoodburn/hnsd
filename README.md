@@ -90,7 +90,7 @@ You're a Linux user so you probably already know what to do. Make sure you have
 git, autotools, libtool, and unbound installed via whatever package manager
 your OS uses.
 You can install these dependencies on any Ubuntu/Debian style linux using
-`sudo apt install -y autotools-dev libtool libunbound-dev`
+`sudo apt install -y autotools-dev libtool libunbound-dev g++ make`
 
 ### Windows
 
@@ -112,7 +112,7 @@ DLLs to the hnsd directory, etc.
 ## Cloning
 
 ``` sh
-$ git clone git://github.com/handshake-org/hnsd.git
+$ git clone https://github.com/handshake-org/hnsd.git
 $ cd hnsd
 ```
 
