@@ -43,8 +43,8 @@ jobs:
       - name: Setup Integration
         uses: actions/setup-node@v4
         with:
-          node-version: lts/*
-          check-latest: true
+          node-version: 20
+          check-latest: false
 
       - name: Install Integration Deps
         working-directory: ./integration
