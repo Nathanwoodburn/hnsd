@@ -38,10 +38,8 @@ jobs:
           node-version: 20
           check-latest: false
 
-      - name: Install Integration Deps
-        working-directory: ./integration
-        run: npm install
-
       - name: Integration Tests
         working-directory: ./integration
-        run: npm run test
+        run: |
+          npm install
+          npm run test
