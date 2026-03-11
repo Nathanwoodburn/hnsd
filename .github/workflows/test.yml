@@ -18,17 +18,27 @@ jobs:
 
       - name: MacOS Install Deps
         if: matrix.os == 'macos-latest'
-        run: brew install automake autoconf libtool unbound
+        run: |
+          brew install automake autoconf libtool unbound
+          echo "CONFIGURE_EXTRA_ARGS=--with-unbound=$(brew --prefix unbound)" >> $GITHUB_ENV
 
       - name: Ubuntu Install Deps
         if: matrix.os == 'ubuntu-latest'
         run: sudo apt-get update && sudo apt-get install -y libunbound-dev
 
       - name: Build
-        run: ./autogen.sh && ./configure --with-network=regtest && make
+        run: ./autogen.sh && ./configure --with-network=regtest $CONFIGURE_EXTRA_ARGS && make
 
       - name: Unit Tests
         run: ./test_hnsd
+
+      - name: Debug HNSD
+        if: matrix.os == 'macos-latest'
+        run: |
+          ls -l hnsd
+          file hnsd
+          otool -L hnsd
+          ./hnsd -v || echo "HNSD failed (expected)"
 
       - name: Setup Integration
         uses: actions/setup-node@v4
@@ -36,8 +46,14 @@ jobs:
           node-version: lts/*
           check-latest: true
 
+      - name: Install Integration Deps
+        working-directory: ./integration
+        run: npm install
+
       - name: Integration Tests
         working-directory: ./integration
         run: |
-          npm install
+          if [[ "${{ matrix.os }}" == "macos-latest" ]]; then
+            export DYLD_LIBRARY_PATH="$(brew --prefix unbound)/lib:$DYLD_LIBRARY_PATH"
+          fi
           npm run test
