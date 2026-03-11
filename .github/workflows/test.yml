@@ -44,8 +44,4 @@ jobs:
 
       - name: Integration Tests
         working-directory: ./integration
-        run: |
-          if [[ "${{ matrix.os }}" == "macos-latest" ]]; then
-            export DYLD_LIBRARY_PATH="$(brew --prefix unbound)/lib:$DYLD_LIBRARY_PATH"
-          fi
-          npm run test
+        run: npm run test
