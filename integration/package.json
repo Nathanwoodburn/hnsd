@@ -9,6 +9,6 @@
   "dependencies": {
     "bmocha": "^2.1.5",
     "bsert": "0.0.10",
-    "hsd": "^4.0.1"
+    "hsd": "^7.0.0"
   }
 }

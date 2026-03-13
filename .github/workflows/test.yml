@@ -35,8 +35,8 @@ jobs:
       - name: Setup Integration
         uses: actions/setup-node@v4
         with:
-          node-version: 20
-          check-latest: false
+          node-version: lts/*
+          check-latest: true
 
       - name: Integration Tests
         working-directory: ./integration
