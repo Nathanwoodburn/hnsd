@@ -27,7 +27,7 @@ jobs:
         run: npm --prefix=hs-names install
 
       - name: Install dependencies (hsd)
-        run: npm --prefix=hs-names install hsd@^5
+        run: npm --prefix=hs-names install hsd@^8
 
       - name: Build
         run: |
