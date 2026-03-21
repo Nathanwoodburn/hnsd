@@ -5,6 +5,9 @@ on: workflow_dispatch
 jobs:
   generate:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
 
     steps:
       - name: Setup nodejs
